@@ -1,27 +1,36 @@
 // src/components/HeroSection.js
 import React from 'react';
-import { motion } from 'framer-motion';
+import { useSpring, animated } from '@react-spring/web';
 import styled from 'styled-components';
+import Background3D from './Background3D';
 
-const HeroSection = () => (
-  <HeroContainer>
-    <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
-      Hello, I'm Ashok Amara
-    </motion.h1>
-    <motion.p initial={{ x: -100 }} animate={{ x: 0 }} transition={{ duration: 1.5 }}>
-      A passionate developer.
-    </motion.p>
-  </HeroContainer>
-);
-
-const HeroContainer = styled.section`
-  height: 100vh;
+const HeroWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #282c34;
+  height: 100vh;
   color: white;
+  text-align: center;
+  position: relative;
+  z-index: 1;
 `;
+
+const HeroSection = () => {
+  const fadeIn = useSpring({ opacity: 1, from: { opacity: 0 }, delay: 200 });
+
+  return (
+    <HeroWrapper>
+      <Background3D />
+      <animated.h1 style={fadeIn}>Hi, I'm a React Developer</animated.h1>
+      <animated.p style={fadeIn}>
+        I build interactive, user-friendly web applications using the latest React technologies.
+      </animated.p>
+      <button onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}>
+        See My Work
+      </button>
+    </HeroWrapper>
+  );
+};
 
 export default HeroSection;

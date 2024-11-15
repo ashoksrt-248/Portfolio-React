@@ -1,38 +1,56 @@
 // src/components/Projects.js
 import React from 'react';
-import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-const projects = [
-  { name: 'Project 1', description: 'Description of Project 1' },
-  { name: 'Project 2', description: 'Description of Project 2' },
-];
-
-const Projects = () => (
-  <ProjectsContainer id="projects">
-    <h2>Projects</h2>
-    {projects.map((project, index) => (
-      <motion.div key={index} initial={{ scale: 0.8 }} whileHover={{ scale: 1.05 }} transition={{ duration: 0.5 }}>
-        <ProjectCard>
-          <h3>{project.name}</h3>
-          <p>{project.description}</p>
-        </ProjectCard>
-      </motion.div>
-    ))}
-  </ProjectsContainer>
-);
-
-const ProjectsContainer = styled.section`
-  padding: 2rem;
-  background: #282c34;
+const ProjectsWrapper = styled.div`
+  padding: 100px 20px;
+  text-align: center;
+  background-color: #282c34;
   color: white;
 `;
 
-const ProjectCard = styled.div`
-  margin: 1rem 0;
-  padding: 1rem;
-  border-radius: 8px;
-  background: #444;
+const ProjectList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
 `;
+
+const ProjectCard = styled.div`
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 250px;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const Projects = () => {
+  const projectData = [
+    { title: 'Portfolio Website', description: 'A modern personal portfolio with React and Three.js.' },
+    { title: 'E-Commerce App', description: 'An intuitive e-commerce platform with a shopping cart.' },
+    { title: 'Chat Application', description: 'Real-time chat built with WebSocket integration.' },
+  ];
+
+  return (
+    <ProjectsWrapper id="projects">
+      <h2>My Projects</h2>
+      <ProjectList>
+        {projectData.map((project, index) => (
+          <ProjectCard key={index}>
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+          </ProjectCard>
+        ))}
+      </ProjectList>
+    </ProjectsWrapper>
+  );
+};
 
 export default Projects;
